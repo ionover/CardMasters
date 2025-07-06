@@ -1,6 +1,7 @@
 package com.example.cardmasters.repository;
 
 import com.example.cardmasters.dto.Card;
+import com.example.cardmasters.exceptions.MoneyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ public class CardRepos {
 
     public boolean addCard(Card card) {
         if (card == null || card.getNumber() == null) {
-            throw new IllegalArgumentException("Карта и номер карты не могут быть null");
+            throw new MoneyException("Карта и номер карты не могут быть null");
         }
 
         return cardStorage.putIfAbsent(card.getNumber(), card) == null;

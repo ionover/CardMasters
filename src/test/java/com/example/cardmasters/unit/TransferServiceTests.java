@@ -5,6 +5,7 @@ import com.example.cardmasters.dto.Card;
 import com.example.cardmasters.dto.TransferRequest;
 import com.example.cardmasters.repository.CardRepos;
 import com.example.cardmasters.services.TransferService;
+import com.example.cardmasters.exceptions.MoneyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -69,8 +70,8 @@ public class TransferServiceTests {
         when(cardRepos.getCard("1111222233334444")).thenReturn(Optional.of(fromCard));
         when(cardRepos.getCard("5555666677778888")).thenReturn(Optional.of(toCard));
 
-        IllegalArgumentException exception = assertThrows(
-            IllegalArgumentException.class, 
+        MoneyException exception = assertThrows(
+            MoneyException.class, 
             () -> transferService.doTransfer(transferRequest)
         );
         

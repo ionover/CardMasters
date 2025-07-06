@@ -7,5 +7,6 @@ public class MoneyException extends RuntimeException{
     }
 
     public MoneyException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
