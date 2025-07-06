@@ -2,6 +2,7 @@ package com.example.cardmasters.handlers;
 
 import com.example.cardmasters.dto.ConfirmRequest;
 import com.example.cardmasters.dto.TransferRequest;
+import com.example.cardmasters.exceptions.MoneyException;
 import com.example.cardmasters.logs.LogWriter;
 import com.example.cardmasters.repository.TransactionsRepos;
 import com.example.cardmasters.services.TransferService;
@@ -22,15 +23,21 @@ public class ConfirmHandler {
 
 
     public Integer handle(ConfirmRequest confirmRequest) {
+        boolean success = false;
         Integer currentTransactionId = confirmRequest.getOperationId();
 
         TransferRequest currentTransferRequest = transactionsRepos.get(currentTransactionId);
 
         if (currentTransferRequest != null && confirmRequest.getCode() == 777) {
-            transferService.doTransfer(currentTransferRequest);
-        }
+            try {
+                success = transferService.doTransfer(currentTransferRequest);
+            } catch (MoneyException e) {
+                System.out.println(e.getMessage());
+            }
 
-        logWriter.addConfirmLog(currentTransactionId);
+        }
+        logWriter.addConfirmLog(currentTransactionId, success);
+
         return currentTransactionId;
     }
 }

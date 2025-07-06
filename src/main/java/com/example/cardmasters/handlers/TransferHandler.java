@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class TransferHandler {
 
+    private static final int COMMISSION = 0;
+
     private final AtomicInteger counter = new AtomicInteger(0);
     private final TransactionsRepos transactionsRepos;
     private final LogWriter logWriter;
@@ -21,11 +23,13 @@ public class TransferHandler {
 
     public Integer handle(TransferRequest transferRequest) {
         Integer id = counter.incrementAndGet();
+
         transactionsRepos.save(id, transferRequest);
+
         logWriter.addTransactionLog(transferRequest.getCardFromNumber(),
                 transferRequest.getCardToNumber(),
                 transferRequest.getAmount(),
-                2,
+                COMMISSION,
                 "Зарегистрирован перевод с id = " + id);
 
         return id;
