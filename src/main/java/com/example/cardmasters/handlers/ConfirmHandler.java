@@ -4,7 +4,9 @@ import com.example.cardmasters.dto.ConfirmRequest;
 import com.example.cardmasters.dto.TransferRequest;
 import com.example.cardmasters.repository.TransactionsRepos;
 import com.example.cardmasters.services.TransferService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ConfirmHandler {
 
     private final TransferService transferService;
