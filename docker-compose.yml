@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   money-service:
-    build: .
+    image: money-service:1.0
     ports:
       - "8080:8080"
     restart: unless-stopped
