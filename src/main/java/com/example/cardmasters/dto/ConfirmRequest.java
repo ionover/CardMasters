@@ -10,11 +10,11 @@ public class ConfirmRequest {
     @NotNull(message = "Код должен быть заполнен")
     private int code;
 
-    public TransferRequest() {
+    public ConfirmRequest() {
         // Конструктор по умолчанию для десериализации JSON
     }
 
-    public TransferRequest(int operationId, int code) {
+    public ConfirmRequest(int operationId, int code) {
         this.operationId = operationId;
         this.code = code;
     }

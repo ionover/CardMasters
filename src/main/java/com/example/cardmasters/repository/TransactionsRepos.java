@@ -3,7 +3,6 @@ package com.example.cardmasters.repository;
 import com.example.cardmasters.dto.TransferRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -15,7 +14,7 @@ public class TransactionsRepos {
         transactions.put(id, request);
     }
 
-    public Optional<TransferRequest> get(Integer id) {
-        return Optional.ofNullable(transactions.get(id));
+    public TransferRequest get(Integer id) {
+        return transactions.get(id);
     }
 }
