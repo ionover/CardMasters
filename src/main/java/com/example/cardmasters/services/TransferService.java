@@ -2,6 +2,7 @@ package com.example.cardmasters.services;
 
 import com.example.cardmasters.dto.Card;
 import com.example.cardmasters.dto.TransferRequest;
+import com.example.cardmasters.logs.LogWriter;
 import com.example.cardmasters.repository.CardRepos;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,6 @@ public class TransferService {
         // Выполняем перевод
         fromCard.setBalance(fromCard.getBalance() - transferAmount);
         toCard.setBalance(toCard.getBalance() + transferAmount);
+
     }
 }

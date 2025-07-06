@@ -2,6 +2,7 @@ package com.example.cardmasters.handlers;
 
 import com.example.cardmasters.dto.ConfirmRequest;
 import com.example.cardmasters.dto.TransferRequest;
+import com.example.cardmasters.logs.LogWriter;
 import com.example.cardmasters.repository.TransactionsRepos;
 import com.example.cardmasters.services.TransferService;
 import org.springframework.stereotype.Component;
@@ -11,10 +12,12 @@ public class ConfirmHandler {
 
     private final TransferService transferService;
     private final TransactionsRepos transactionsRepos;
+    private final LogWriter logWriter;
 
-    public ConfirmHandler(TransferService transferService, TransactionsRepos transactionsRepos) {
+    public ConfirmHandler(TransferService transferService, TransactionsRepos transactionsRepos, LogWriter logWriter) {
         this.transferService = transferService;
         this.transactionsRepos = transactionsRepos;
+        this.logWriter = logWriter;
     }
 
 
@@ -23,10 +26,11 @@ public class ConfirmHandler {
 
         TransferRequest currentTransferRequest = transactionsRepos.get(currentTransactionId);
 
-        if (currentTransferRequest!=null && confirmRequest.getCode()==777) {
+        if (currentTransferRequest != null && confirmRequest.getCode() == 777) {
             transferService.doTransfer(currentTransferRequest);
         }
 
+        logWriter.addConfirmLog(currentTransactionId);
         return currentTransactionId;
     }
 }

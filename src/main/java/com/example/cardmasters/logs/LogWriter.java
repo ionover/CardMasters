@@ -41,7 +41,17 @@ public class LogWriter {
             writer.write(logEntry);
             writer.newLine();
         } catch (Exception e) {
+            System.out.println("При записи лога транзакции произошла ошибка. Причина: " + e.getMessage());
+        }
+    }
 
+    public synchronized void addConfirmLog(Integer id) {
+
+        String logEntry = "Транзакция с ID: '" + id + "' успешно проведена";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
+            writer.write(logEntry);
+            writer.newLine();
+        } catch (Exception e) {
             System.out.println("При записи лога транзакции произошла ошибка. Причина: " + e.getMessage());
         }
     }
