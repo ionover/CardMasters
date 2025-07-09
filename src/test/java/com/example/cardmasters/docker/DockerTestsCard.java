@@ -26,6 +26,7 @@ class DockerTestsCard {
                 .withExposedPorts(8085)
                 .waitingFor(Wait.forHttp("/cards").forStatusCode(200));
         container.start();
+
         return container;
     }
 
