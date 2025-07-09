@@ -90,9 +90,9 @@ class DockerTestsCard {
 
             ResponseEntity<Void> secondResponse = restTemplate.postForEntity(
                 baseUrl + "/addCard", secondRequest, Void.class);
-            
+
             // 3. Ожидаем получить статус 500 (Internal Server Error)
-            assertEquals(500, secondResponse.getStatusCodeValue());
+            assertEquals(400, secondResponse.getStatusCodeValue());
         } finally {
             devApp.stop();
         }
@@ -122,7 +122,7 @@ class DockerTestsCard {
             assertEquals(200, initialCardsResponse.getStatusCodeValue());
             assertNotNull(initialCardsResponse.getBody());
             assertEquals(1, initialCardsResponse.getBody().length);
-            
+
             Card retrievedOriginalCard = initialCardsResponse.getBody()[0];
             assertEquals("9876543210987654", retrievedOriginalCard.getNumber());
             assertEquals(15000L, retrievedOriginalCard.getBalance());
@@ -134,7 +134,7 @@ class DockerTestsCard {
 
             ResponseEntity<Void> duplicateResponse = restTemplate.postForEntity(
                 baseUrl + "/addCard", duplicateRequest, Void.class);
-            assertEquals(500, duplicateResponse.getStatusCodeValue());
+            assertEquals(400, duplicateResponse.getStatusCodeValue());
 
             // 4. Проверяем, что исходная карта не изменилась
             ResponseEntity<Card[]> finalCardsResponse = restTemplate.getForEntity(

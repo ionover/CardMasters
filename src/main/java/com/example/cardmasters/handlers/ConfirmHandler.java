@@ -29,12 +29,7 @@ public class ConfirmHandler {
         TransferRequest currentTransferRequest = transactionsRepos.get(currentTransactionId);
 
         if (currentTransferRequest != null && confirmRequest.getCode() == 777) {
-            try {
-                success = transferService.doTransfer(currentTransferRequest);
-            } catch (MoneyException e) {
-                System.out.println(e.getMessage());
-            }
-
+            success = transferService.doTransfer(currentTransferRequest);
         }
         logWriter.addConfirmLog(currentTransactionId, success);
 

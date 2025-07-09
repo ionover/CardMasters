@@ -192,7 +192,7 @@ class TestsTransaction {
             HttpEntity<ConfirmRequest> confirmHttpRequest = new HttpEntity<>(confirmRequest, headers);
             ResponseEntity<Integer> confirmResponse = restTemplate.postForEntity(
                 baseUrl + "/confirmOperation", confirmHttpRequest, Integer.class);
-            assertEquals(200, confirmResponse.getStatusCodeValue());
+            assertEquals(400, confirmResponse.getStatusCodeValue());
 
             // 5. Проверяем, что балансы НЕ изменились (недостаточно средств)
             ResponseEntity<Card[]> cardsResponse = restTemplate.getForEntity(
