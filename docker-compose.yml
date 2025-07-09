@@ -4,5 +4,5 @@ services:
   money-service:
     image: money-service:1.0
     ports:
-      - "8080:8080"
+      - "5500:5500"
     restart: unless-stopped

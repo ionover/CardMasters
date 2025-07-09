@@ -1,2 +1,20 @@
 # CardMasters
-```docker build -t money-service:1.0 .```
+
+1. Создаём jar
+
+```mvn clean install```
+
+2. Создаём имэйдж
+
+```docker build -t devapp:latest .```
+
+3. Для сборки фронт нужна 14 версия ноды (фронт живёт в папке front)
+```nvm use 14``` -- если у вас установлена ещё какая-то
+```npm i```
+Порты все сразу прописаны так, чтобы всё работало
+
+4. Запускаем контейнер
+```docker run -p 5500:5500 devapp:latest```
+
+5. Запускаем фронт
+```npm run start```

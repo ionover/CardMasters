@@ -28,7 +28,7 @@ public abstract class BaseDockerTest {
     @BeforeEach
     void setUp() {
         devApp = createAndStartContainer();
-        int devPort = devApp.getMappedPort(8085);
+        int devPort = devApp.getMappedPort(5500);
         baseUrl = "http://localhost:" + devPort;
 
         headers = new HttpHeaders();
@@ -44,7 +44,7 @@ public abstract class BaseDockerTest {
 
     private GenericContainer<?> createAndStartContainer() {
         GenericContainer<?> container = new GenericContainer<>("devapp:latest")
-                .withExposedPorts(8085)
+                .withExposedPorts(5500)
                 .waitingFor(Wait.forHttp("/cards").forStatusCode(200));
         container.start();
 
