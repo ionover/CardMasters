@@ -187,12 +187,13 @@ class TestsTransaction {
 
             Integer operationId = transferResponse.getBody();
 
-            // 4. Подтверждаем операцию
+            // 4. Подтверждаем операцию (ожидаем ошибку из-за недостатка средств)
             ConfirmRequest confirmRequest = new ConfirmRequest(operationId, 777);
             HttpEntity<ConfirmRequest> confirmHttpRequest = new HttpEntity<>(confirmRequest, headers);
-            ResponseEntity<Integer> confirmResponse = restTemplate.postForEntity(
-                baseUrl + "/confirmOperation", confirmHttpRequest, Integer.class);
+            ResponseEntity<String> confirmResponse = restTemplate.postForEntity(
+                baseUrl + "/confirmOperation", confirmHttpRequest, String.class);
             assertEquals(400, confirmResponse.getStatusCodeValue());
+            assertEquals("Недостаточно средств на карте отправителя", confirmResponse.getBody());
 
             // 5. Проверяем, что балансы НЕ изменились (недостаточно средств)
             ResponseEntity<Card[]> cardsResponse = restTemplate.getForEntity(
