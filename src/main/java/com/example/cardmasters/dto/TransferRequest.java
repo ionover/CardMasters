@@ -26,7 +26,8 @@ public class TransferRequest {
         // Конструктор по умолчанию для десериализации JSON
     }
 
-    public TransferRequest(String cardFromNumber, String cardFromValidTill, String cardFromCVV, String cardToNumber, Amount amount) {
+    public TransferRequest(String cardFromNumber, String cardFromValidTill, String cardFromCVV, String cardToNumber,
+                           Amount amount) {
         this.cardFromNumber = cardFromNumber;
         this.cardFromValidTill = cardFromValidTill;
         this.cardFromCVV = cardFromCVV;

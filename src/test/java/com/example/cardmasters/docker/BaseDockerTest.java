@@ -30,7 +30,7 @@ public abstract class BaseDockerTest {
         devApp = createAndStartContainer();
         int devPort = devApp.getMappedPort(8085);
         baseUrl = "http://localhost:" + devPort;
-        
+
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
     }
@@ -47,6 +47,7 @@ public abstract class BaseDockerTest {
                 .withExposedPorts(8085)
                 .waitingFor(Wait.forHttp("/cards").forStatusCode(200));
         container.start();
+
         return container;
     }
 
@@ -56,6 +57,7 @@ public abstract class BaseDockerTest {
 
     protected ResponseEntity<Void> createCard(Card card) {
         HttpEntity<Card> request = new HttpEntity<>(card, headers);
+
         return restTemplate.postForEntity(baseUrl + "/addCard", request, Void.class);
     }
 
@@ -70,11 +72,12 @@ public abstract class BaseDockerTest {
     }
 
     protected Card findCardByNumber(Card[] cards, String cardNumber) {
-        for (Card card : cards) {
+        for (Card card: cards) {
             if (cardNumber.equals(card.getNumber())) {
                 return card;
             }
         }
+
         return null;
     }
 
@@ -82,7 +85,7 @@ public abstract class BaseDockerTest {
         ResponseEntity<Card[]> cardsResponse = getAllCards();
         assertEquals(200, cardsResponse.getStatusCodeValue());
         Card[] cards = cardsResponse.getBody();
-        
+
         Card card = findCardByNumber(cards, cardNumber);
         assertEquals(expectedBalance, card.getBalance());
     }

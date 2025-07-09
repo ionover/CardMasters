@@ -46,7 +46,7 @@ public class CardReposTests {
         assertTrue(firstResult);
         assertFalse(duplicateResult);
         assertTrue(retrievedCard.isPresent());
-        
+
         assertEquals(10000L, retrievedCard.get().getBalance());
         assertEquals("12/25", retrievedCard.get().getValidTill());
         assertEquals(123, retrievedCard.get().getCvv());

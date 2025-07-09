@@ -48,7 +48,8 @@ class TestsTransaction extends BaseDockerTest {
 
         // 4. Проверяем, что балансы изменились после подтверждения
         assertCardBalance(TestDataFactory.SENDER_CARD_NUMBER, TestDataFactory.EXPECTED_SENDER_BALANCE_AFTER_TRANSFER);
-        assertCardBalance(TestDataFactory.RECEIVER_CARD_NUMBER, TestDataFactory.EXPECTED_RECEIVER_BALANCE_AFTER_TRANSFER);
+        assertCardBalance(TestDataFactory.RECEIVER_CARD_NUMBER,
+                          TestDataFactory.EXPECTED_RECEIVER_BALANCE_AFTER_TRANSFER);
     }
 
     @Test

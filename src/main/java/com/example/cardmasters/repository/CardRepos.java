@@ -32,11 +32,9 @@ public class CardRepos {
         return cardStorage.values();
     }
 
-
     public int getCardCount() {
         return cardStorage.size();
     }
-
 
     public void clearAll() {
         cardStorage.clear();

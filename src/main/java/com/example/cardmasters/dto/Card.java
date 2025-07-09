@@ -28,7 +28,6 @@ public class Card {
         this.cvv = cvv;
     }
 
-
     public String getNumber() {
         return number;
     }

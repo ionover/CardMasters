@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class TransferHandlerTests {
 
@@ -32,43 +33,36 @@ public class TransferHandlerTests {
     @Test
     void handle_FirstTransferRequest_ReturnsIdOne() {
         TransferRequest transferRequest = new TransferRequest(
-            "1111222233334444",
-            "12/25",
-            "123",
-            "5555666677778888",
-            new Amount(1000, "RUB")
+                "1111222233334444",
+                "12/25",
+                "123",
+                "5555666677778888",
+                new Amount(1000, "RUB")
         );
 
         Integer result = transferHandler.handle(transferRequest);
 
         assertEquals(1, result);
-        
+
         verify(transactionsRepos, times(1)).save(1, transferRequest);
-//        verify(logWriter, times(1)).addTransactionLog(
-//            "1111222233334444",
-//            "5555666677778888",
-//            transferRequest.getAmount(),
-//            0,
-//            "Зарегистрирован перевод с id = 1"
-//        );
     }
 
     @Test
     void handle_MultipleTransferRequests_ReturnsIncrementingIds() {
         TransferRequest firstRequest = new TransferRequest(
-            "1111222233334444",
-            "12/25",
-            "123",
-            "5555666677778888",
-            new Amount(1000, "RUB")
+                "1111222233334444",
+                "12/25",
+                "123",
+                "5555666677778888",
+                new Amount(1000, "RUB")
         );
-        
+
         TransferRequest secondRequest = new TransferRequest(
-            "9999888877776666",
-            "06/26",
-            "456",
-            "1111222233334444",
-            new Amount(2000, "RUB")
+                "9999888877776666",
+                "06/26",
+                "456",
+                "1111222233334444",
+                new Amount(2000, "RUB")
         );
 
         Integer firstId = transferHandler.handle(firstRequest);
@@ -76,24 +70,8 @@ public class TransferHandlerTests {
 
         assertEquals(1, firstId);
         assertEquals(2, secondId);
-        
+
         verify(transactionsRepos, times(1)).save(1, firstRequest);
         verify(transactionsRepos, times(1)).save(2, secondRequest);
-        
-//        verify(logWriter, times(1)).addTransactionLog(
-//            "1111222233334444",
-//            "5555666677778888",
-//            firstRequest.getAmount(),
-//            2,
-//            "Зарегистрирован перевод с id = 1"
-//        );
-        
-//        verify(logWriter, times(1)).addTransactionLog(
-//            "9999888877776666",
-//            "1111222233334444",
-//            secondRequest.getAmount(),
-//            2,
-//            "Зарегистрирован перевод с id = 2"
-//        );
     }
 }

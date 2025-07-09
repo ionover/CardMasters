@@ -4,7 +4,6 @@ import com.example.cardmasters.dto.Card;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DockerTestsCard extends BaseDockerTest {
 
@@ -29,7 +28,7 @@ class DockerTestsCard extends BaseDockerTest {
 
         // 2. Пытаемся создать вторую карту с тем же номером
         Card secondCard = TestDataFactory.createSecondDuplicateCard();
-        
+
         // 3. Ожидаем получить статус 400 (Bad Request)
         assertCardCreationFailed(secondCard, 400);
     }

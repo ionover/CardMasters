@@ -25,7 +25,7 @@ public class TransactionTestHelper {
     public Integer executeTransfer(TransferRequest transferRequest) {
         HttpEntity<TransferRequest> request = new HttpEntity<>(transferRequest, headers);
         ResponseEntity<Integer> response = restTemplate.postForEntity(
-            baseUrl + "/transfer", request, Integer.class);
+                baseUrl + "/transfer", request, Integer.class);
         assertEquals(200, response.getStatusCodeValue());
         assertNotNull(response.getBody());
         return response.getBody();
@@ -44,7 +44,7 @@ public class TransactionTestHelper {
     public void setupTwoCardsForTransfer() {
         // Создаем карту отправителя
         assertCardCreatedSuccessfully(TestDataFactory.createSenderCard());
-        
+
         // Создаем карту получателя
         assertCardCreatedSuccessfully(TestDataFactory.createReceiverCard());
     }
@@ -52,7 +52,7 @@ public class TransactionTestHelper {
     public void setupTwoCardsWithLowSenderBalance() {
         // Создаем карту отправителя с низким балансом
         assertCardCreatedSuccessfully(TestDataFactory.createLowBalanceSenderCard());
-        
+
         // Создаем карту получателя
         assertCardCreatedSuccessfully(TestDataFactory.createReceiverCard());
     }

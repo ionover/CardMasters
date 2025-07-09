@@ -27,10 +27,10 @@ public class TransferHandler {
         transactionsRepos.save(id, transferRequest);
 
         logWriter.addTransactionLog(transferRequest.getCardFromNumber(),
-                transferRequest.getCardToNumber(),
-                transferRequest.getAmount(),
-                COMMISSION,
-                "Зарегистрирован перевод с id = " + id);
+                                    transferRequest.getCardToNumber(),
+                                    transferRequest.getAmount(),
+                                    COMMISSION,
+                                    "Зарегистрирован перевод с id = " + id);
 
         return id;
     }

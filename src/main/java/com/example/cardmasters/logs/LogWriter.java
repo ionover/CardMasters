@@ -34,7 +34,8 @@ public class LogWriter {
         String date = now.format(DATE_FORMATTER);
         String time = now.format(TIME_FORMATTER);
 
-        String logEntry = String.format("%s %s | С карты номер: %s, на карту номер: %s, зафиксирован перевод: %s с комиссией: %d | %s",
+        String logEntry = String.format(
+                "%s %s | С карты номер: %s, на карту номер: %s, зафиксирован перевод: %s с комиссией: %d | %s",
                 date, time, cardFrom, cardTo, amount, commission, result);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
@@ -54,7 +55,7 @@ public class LogWriter {
         String time = now.format(TIME_FORMATTER);
 
         String logEntry = String.format("%s %s | Транзакция с ID: '%d' %s",
-                date, time, id, message);
+                                        date, time, id, message);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
             writer.write(logEntry);
@@ -72,8 +73,8 @@ public class LogWriter {
         String status = success ? "добавлена успешно" : "не добавлена";
 
         String logEntry = String.format("%s %s | Карта номер: %s. Баланс: %d. Срок: %s. CVV: %d. | %s",
-                date, time, createdCard.getNumber(), createdCard.getBalance(),
-                createdCard.getValidTill(), createdCard.getCvv(), status);
+                                        date, time, createdCard.getNumber(), createdCard.getBalance(),
+                                        createdCard.getValidTill(), createdCard.getCvv(), status);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
             writer.write(logEntry);
